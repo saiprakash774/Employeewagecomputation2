@@ -18,8 +18,7 @@ public class EmployeewageComputation
 					return emphr;
 		}
     }
-	public static void main(String[] args)
-	{
+	public static void computeEmpwage() {
 		int totalemphrs=0,totalworkingdays=0;
 		while( totalemphrs < maxhrprmonth && totalworkingdays <20)
 		{
@@ -30,5 +29,9 @@ public class EmployeewageComputation
 		System.out.println("Employee working days: "+totalworkingdays);
 		System.out.println("Employee total working hours: "+totalemphrs);
 		System.out.println("Employee Wage per month: "+totalemphrs*emprateprhr);
+	}
+	public static void main(String[] args)
+	{
+		computeEmpwage();	
 	}
 }
