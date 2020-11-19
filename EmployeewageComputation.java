@@ -2,7 +2,7 @@ package day4;
 
 public class EmployeewageComputation 
 {
-	public static final int IS_FULL_TIME=1,IS_PART_TIME=2,emprateprhr=20,numofworkingdays=20,maxhrprmonth=100;
+	public static final int IS_FULL_TIME=1,IS_PART_TIME=2;
 	public static int dailywage(int empCheck)
     {
 		int emphr=0;
@@ -18,20 +18,22 @@ public class EmployeewageComputation
 					return emphr;
 		}
     }
-	public static void computeEmpwage() {
+	public static void computeEmpwage(String company, int emprateprhr, int numofworkingdays,int maxhrprmonth) 
+	{
 		int totalemphrs=0,totalworkingdays=0;
-		while( totalemphrs < maxhrprmonth && totalworkingdays <20)
+		while( totalemphrs < maxhrprmonth && totalworkingdays <numofworkingdays)
 		{
 			totalworkingdays++;
 			int empCheck= (int)Math.floor(Math.random() *10) % 3;
 			totalemphrs+=dailywage(empCheck);
+			System.out.println("Day: " + totalworkingdays + "  Emp hr "+ totalemphrs );
 		}
-		System.out.println("Employee working days: "+totalworkingdays);
-		System.out.println("Employee total working hours: "+totalemphrs);
-		System.out.println("Employee Wage per month: "+totalemphrs*emprateprhr);
+		int totalempwage=totalemphrs*emprateprhr;
+		System.out.println("Total Employee wage for Company: " + company + " is:" +totalempwage);
 	}
 	public static void main(String[] args)
 	{
-		computeEmpwage();	
+		computeEmpwage("Trends",20,20,100);
+		computeEmpwage("Twills",25,20,100);
 	}
 }
