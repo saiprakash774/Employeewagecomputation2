@@ -3,18 +3,16 @@ package day4;
 public class EmployeewageComputation 
 {
 	public static final int IS_FULL_TIME=1,IS_PART_TIME=2;
-	private final String company;
-	private final int emprateprhr;
-	private final int numofworkingdays;
-	private final int maxhrprmonth;
-	private int totalempwage;
-	
-	public EmployeewageComputation(String company, int emprateprhr,int numofworkingdays,int maxhrprmonth) 
+	private int numofcompany=0;
+	private CompanyEmpWage[] companyempwagearray;
+	public EmployeewageComputation() 
 	{
-		this.company=company;
-		this.emprateprhr=emprateprhr;
-		this.numofworkingdays=numofworkingdays;
-		this.maxhrprmonth=maxhrprmonth;
+		companyempwagearray=new CompanyEmpWage[5];
+	}
+	private void addCompanyEmpWage(String company, int emprateprhr,int numofworkingdays,int maxhrprmonth) 
+	{
+		companyempwagearray[numofcompany]=new CompanyEmpWage(company,emprateprhr,numofworkingdays,maxhrprmonth);
+		numofcompany++;
 	}
 	public static int dailywage(int empCheck)
     {
@@ -31,29 +29,33 @@ public class EmployeewageComputation
 					return emphr;
 		}
     }
-	public void computeEmpwage( ) 
+	private void computeEmpwage() 
+	{
+		for(int index=0;index<numofcompany;index++) 
+		{
+			companyempwagearray[index].setTotalempwage(this.computeEmpwage(companyempwagearray[index]));
+			System.out.println(companyempwagearray[index]);
+		}
+	}
+	private int computeEmpwage(CompanyEmpWage companyempwage ) 
 	{
 		int totalemphrs=0,totalworkingdays=0;
-		while( totalemphrs < maxhrprmonth && totalworkingdays <numofworkingdays)
+		while( totalemphrs < companyempwage.maxhrprmonth && totalworkingdays <companyempwage.numofworkingdays)
 		{
 			totalworkingdays++;
 			int empCheck= (int)Math.floor(Math.random() *10) % 3;
 			totalemphrs+=dailywage(empCheck);
 			System.out.println("Day: " + totalworkingdays + "  Emp hr "+ totalemphrs );
 		}
-		totalempwage=totalemphrs*emprateprhr;
+		totalemphrs+=totalemphrs;
+		return totalemphrs*companyempwage.emprateprhr;
 	}
-	public String toString()
-	{
-		return "Total Employee wage for Company: " + company + " is:" +totalempwage;
-	}
+	
 	public static void main(String[] args)
 	{
-		EmployeewageComputation Trends=new EmployeewageComputation("Trends",20,20,100);
-		EmployeewageComputation Twills=new EmployeewageComputation("Twills",20,25,100);
-		Trends.computeEmpwage();
-		System.out.println(Trends);
-		Twills.computeEmpwage();
-		System.out.println(Twills);
+		EmployeewageComputation employeewagecomputation=new EmployeewageComputation();
+		employeewagecomputation.addCompanyEmpWage("Trends",20,20,100);
+		employeewagecomputation.addCompanyEmpWage("Twills",20,25,100);
+		employeewagecomputation.computeEmpwage();
 	}
 }
