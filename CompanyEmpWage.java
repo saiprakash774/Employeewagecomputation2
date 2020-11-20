@@ -14,6 +14,7 @@ public class CompanyEmpWage {
 		this.emprateprhr=emprateprhr;
 		this.numofworkingdays=numofworkingdays;
 		this.maxhrprmonth=maxhrprmonth;
+		totalempwage=0;
 	}
 	
 	public void setTotalempwage(int totalempwage) 

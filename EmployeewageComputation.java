@@ -18,7 +18,7 @@ public class EmployeewageComputation implements CompanyEmpWageInterface
 		companyEmpWageList.add(companyEmpWage);
 		companyEmpWageMap.put(company, companyEmpWage);
 	}
-	public static int dailywage(int empCheck)
+	public int dailywage(int empCheck)
     {
 		int emphr=0;
 		switch(empCheck)
