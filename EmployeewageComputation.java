@@ -1,18 +1,22 @@
 package day4;
 
+import java.util.*;
+
 public class EmployeewageComputation implements CompanyEmpWageInterface
 {
 	public static final int IS_FULL_TIME=1,IS_PART_TIME=2;
-	private int numofcompany=0;
-	private CompanyEmpWage[] companyempwagearray;
+	private LinkedList<CompanyEmpWage>companyEmpWageList;
+	private Map<String,CompanyEmpWage>companyEmpWageMap;
 	public EmployeewageComputation() 
 	{
-		companyempwagearray=new CompanyEmpWage[5];
+		companyEmpWageList=new LinkedList<>();
+		companyEmpWageMap=new HashMap<>();
 	}
 	public void addCompanyEmpWage(String company, int emprateprhr,int numofworkingdays,int maxhrprmonth) 
 	{
-		companyempwagearray[numofcompany]=new CompanyEmpWage(company,emprateprhr,numofworkingdays,maxhrprmonth);
-		numofcompany++;
+		CompanyEmpWage companyEmpWage=new CompanyEmpWage(company,emprateprhr,numofworkingdays,maxhrprmonth);
+		companyEmpWageList.add(companyEmpWage);
+		companyEmpWageMap.put(company, companyEmpWage);
 	}
 	public static int dailywage(int empCheck)
     {
@@ -31,13 +35,14 @@ public class EmployeewageComputation implements CompanyEmpWageInterface
     }
 	public void computeEmpwage() 
 	{
-		for(int index=0;index<numofcompany;index++) 
+		for(int index=0;index<companyEmpWageList.size();index++) 
 		{
-			companyempwagearray[index].setTotalempwage(this.computeEmpwage(companyempwagearray[index]));
-			System.out.println(companyempwagearray[index]);
+		CompanyEmpWage companyEmpWage=companyEmpWageList.get(index);
+		companyEmpWage.setTotalempwage(this.computeEmpwage(companyEmpWage));
+		System.out.println(companyEmpWage);
 		}
 	}
-	private int computeEmpwage(CompanyEmpWage companyempwage ) 
+	public int computeEmpwage(CompanyEmpWage companyempwage ) 
 	{
 		int totalemphrs=0,totalworkingdays=0;
 		while( totalemphrs < companyempwage.maxhrprmonth && totalworkingdays <companyempwage.numofworkingdays)
@@ -53,7 +58,7 @@ public class EmployeewageComputation implements CompanyEmpWageInterface
 	
 	public static void main(String[] args)
 	{
-		EmployeewageComputation employeewagecomputation=new EmployeewageComputation();
+		CompanyEmpWageInterface employeewagecomputation=new EmployeewageComputation();
 		employeewagecomputation.addCompanyEmpWage("Trends",20,20,100);
 		employeewagecomputation.addCompanyEmpWage("Twills",20,25,100);
 		employeewagecomputation.computeEmpwage();
