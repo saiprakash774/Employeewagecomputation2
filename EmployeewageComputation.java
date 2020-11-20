@@ -1,6 +1,6 @@
 package day4;
 
-public class EmployeewageComputation 
+public class EmployeewageComputation implements CompanyEmpWageInterface
 {
 	public static final int IS_FULL_TIME=1,IS_PART_TIME=2;
 	private int numofcompany=0;
@@ -9,7 +9,7 @@ public class EmployeewageComputation
 	{
 		companyempwagearray=new CompanyEmpWage[5];
 	}
-	private void addCompanyEmpWage(String company, int emprateprhr,int numofworkingdays,int maxhrprmonth) 
+	public void addCompanyEmpWage(String company, int emprateprhr,int numofworkingdays,int maxhrprmonth) 
 	{
 		companyempwagearray[numofcompany]=new CompanyEmpWage(company,emprateprhr,numofworkingdays,maxhrprmonth);
 		numofcompany++;
@@ -29,7 +29,7 @@ public class EmployeewageComputation
 					return emphr;
 		}
     }
-	private void computeEmpwage() 
+	public void computeEmpwage() 
 	{
 		for(int index=0;index<numofcompany;index++) 
 		{
