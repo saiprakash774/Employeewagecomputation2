@@ -56,11 +56,17 @@ public class EmployeewageComputation implements CompanyEmpWageInterface
 		return totalemphrs*companyempwage.emprateprhr;
 	}
 	
+	
 	public static void main(String[] args)
 	{
 		CompanyEmpWageInterface employeewagecomputation=new EmployeewageComputation();
 		employeewagecomputation.addCompanyEmpWage("Trends",20,20,100);
 		employeewagecomputation.addCompanyEmpWage("Twills",20,25,100);
 		employeewagecomputation.computeEmpwage();
+		System.out.println("Total Wage for Trends Company: " +employeewagecomputation.getTotalWage("Trends"));
+	}
+	@Override
+	public int getTotalWage(String company) {
+		return companyEmpWageMap.get(company).totalempwage;
 	}
 }
